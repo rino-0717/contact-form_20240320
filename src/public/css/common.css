@@ -1,0 +1,32 @@
+.header {
+    background: white;
+}
+
+.header__inner {
+    margin: 0 auto;
+    padding: 20px 15px;
+    max-width: 1230px;
+}
+
+.header__logo {
+    color: rgb(188, 152, 80);
+    text-decoration: none;
+    text-align: center;
+    font-weight: lighter;
+    font-size: 24px;
+}
+
+h1 {
+    color: rgb(155, 126, 68);
+    text-decoration: none;
+    text-align: center;
+    font-weight: lighter;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 57px;
+}
+
+.header_style {
+    border-width: 1px;
+    border-style:solid;
+    border-color:rgba(250, 242, 242, 0.904);
+}

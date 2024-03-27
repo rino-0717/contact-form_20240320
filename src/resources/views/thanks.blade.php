@@ -1,19 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>thanks</title>
-    <link rel="stylesheet" href="{{ asset('css/thanks.css') }}">
-</head>
-<body>
-    <div class="thanks">
-        <div class="thanks_back">Thank you</div>
-        <div class="thanks_front">お問い合わせありがとうございました</div>
-        <div class="form__button">
-            <button class="form__button-submit" type="submit">HOME</button>
-            <link rel="index.blade.php">
-        </div>
+@extends('layouts.app')
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/thanks.css')}}">
+@endsection
+
+@section('content')
+<div class="thanks-page">
+    <div class="thanks-page__inner">
+        <p class="thanks-page__message">お問い合わせありがとうございました</p>
+            <form class="thanks-page__form" action="/" method="get">
+                <button class="thanks-page__btn btn">HOME</button>
+            </form>
     </div>
-</body>
-</html>
+</div>
+<div class="thanks-page-bg__inner">
+    <span class="thanks-page-bg__text">Thank you</span>
+</div>
+@endsection

@@ -13,11 +13,10 @@ class ContactController extends Controller
 {
     public function index()
     {
-        //ファイル内参照
         $categories = Category::all();
         return view('contact', compact('categories'));
     }
-    // 教材参照
+
     public function confirm(ContactRequest $request)
     {
         $contacts = $request->all();
@@ -45,6 +44,7 @@ class ContactController extends Controller
                 'detail'
             ])
         );
+
         return view('thanks');
     }
 
@@ -53,7 +53,7 @@ class ContactController extends Controller
         $contacts = Contact::with('category')->paginate(7);
         $categories = Category::all();
         $csvData = Contact::all();
-            return view('admin', compact('contacts', 'categories', 'csvData'));
+        return view('admin', compact('contacts', 'categories', 'csvData'));
     }
 
     public function search(Request $request)
@@ -62,24 +62,29 @@ class ContactController extends Controller
             return redirect('/admin')->withInput();
         }
         $query = Contact::query();
+
         $query = $this->getSearchQuery($request, $query);
+
         $contacts = $query->paginate(7);
         $csvData = $query->get();
         $categories = Category::all();
-            return view('admin', compact('contacts', 'categories', 'csvData'));
+        return view('admin', compact('contacts', 'categories', 'csvData'));
     }
 
     public function destroy(Request $request)
     {
         Contact::find($request->id)->delete();
-            return redirect('/admin');
+        return redirect('/admin');
     }
 
     public function export(Request $request)
     {
         $query = Contact::query();
+
         $query = $this->getSearchQuery($request, $query);
+
         $csvData = $query->get()->toArray();
+
         $csvHeader = [
             'id', 'category_id', 'first_name', 'last_name', 'gender', 'email', 'tell', 'address', 'building', 'detail', 'created_at', 'updated_at'
         ];
@@ -88,6 +93,7 @@ class ContactController extends Controller
             $createCsvFile = fopen('php://output', 'w');
 
             mb_convert_variables('SJIS-win', 'UTF-8', $csvHeader);
+
             fputcsv($createCsvFile, $csvHeader);
 
             foreach ($csvData as $csv) {
@@ -102,7 +108,7 @@ class ContactController extends Controller
             'Content-Disposition' => 'attachment; filename="contacts.csv"',
         ]);
 
-            return $response;
+        return $response;
     }
 
     private function getSearchQuery($request, $query)
@@ -127,6 +133,6 @@ class ContactController extends Controller
             $query->whereDate('created_at', '=', $request->date);
         }
 
-            return $query;
+        return $query;
     }
 }
